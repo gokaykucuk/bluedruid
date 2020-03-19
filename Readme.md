@@ -15,3 +15,6 @@ Here will be some steps how to get up and running. Some examples will follow bel
 ## Installation
 
 ```npm install --save bluedruid```
+
+## Functions
+
