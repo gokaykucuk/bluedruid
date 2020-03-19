@@ -3,6 +3,8 @@
 
 import {faunaClient, q} from './Connection';
 import {flatten} from 'lodash';
+import {values} from "faunadb";
+import Document = values.Document;
 
 export const ExistsOnIndex = async (collectionName: string, params: any, matchType: string = 'any') => {
 
@@ -18,7 +20,7 @@ export const ExistsOnIndex = async (collectionName: string, params: any, matchTy
 *  */
 
 export const GetDocuments = async (collectionName: string, page: number = 0) => {
-    const faunaResponse = await faunaClient.query(
+    const faunaResponse: Document = await faunaClient.query(
        q.Paginate(
            q.Match(
                q.Index(`all_${collectionName}`)
@@ -42,7 +44,7 @@ type queryPair = {
  * @constructor
  */
 export const MatchParamOnIndex = async (collectionName: string, param: queryPair) => {
-    const faunaResponse = await
+    const faunaResponse: Document = await
         faunaClient.query(
             q.Paginate(q.Match(q.Index(`${collectionName}_by_${param.columnName}`), param.value))
         );
@@ -52,11 +54,11 @@ export const MatchParamOnIndex = async (collectionName: string, param: queryPair
 
 //TODO: Improve and enable again
 export const MatchParamsByByIndex = async (collectionName: string, params: any) => {
-    const faunaResponses = await Promise.all(Object.entries(params).map((param) => {
+    const faunaResponses: any = await Promise.all(Object.entries(params).map((param) => {
         return faunaClient.query(
             q.Paginate(q.Match(q.Index(`${collectionName}_by_${param[0]}`), param[1] as any))
         );
     }));
 
-    return flatten(faunaResponses.map((response) => response['data']));
+    return flatten(faunaResponses.map((response: any) => response['data']));
 };
