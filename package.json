@@ -1,0 +1,39 @@
+{
+  "name": "bluedruid",
+  "version": "1.0.0",
+  "description": "Collection of FaunaDB related functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest .",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gokaykucuk/bluedruid.git"
+  },
+  "keywords": [
+    "fauna",
+    "faunadb"
+  ],
+  "author": "Gokay Kucuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gokaykucuk/bluedruid/issues"
+  },
+  "homepage": "https://github.com/gokaykucuk/bluedruid#readme",
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.2",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "@types/lodash": "^4.14.149",
+    "faunadb": "^2.13.0",
+    "lodash": "^4.17.15"
+  }
+}
