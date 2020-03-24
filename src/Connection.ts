@@ -1,7 +1,13 @@
 import * as faunadb from 'faunadb';
+import { ReadYAML } from './utils';
+import { get } from 'shades';
+import * as _ from 'lodash';
 
 export const q = faunadb.query;
 
-export const faunaClient = new faunadb.Client({
-    secret: process.env.FAUNA_ROOT_KEY as string,
-});
+const envConfig = _.flow(
+    ReadYAML,
+    get(process.env.NODE_ENV as string)
+);
+
+export const faunaClient = new faunadb.Client(envConfig('./db/config.yml'));

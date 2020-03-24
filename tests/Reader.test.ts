@@ -1,6 +1,5 @@
 import {GetAllDocuments, MatchParamOnIndex, GetRefsByParams} from "../src/Read";
 
-
 describe('reader', () => {
     test('reader can match param on idexes', async () => {
         const matchResult = await MatchParamOnIndex('deals', {

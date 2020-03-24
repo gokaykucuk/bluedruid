@@ -7,7 +7,9 @@
   "scripts": {
     "test": "jest .",
     "build": "tsc",
-    "prepare": "npm run build"
+    "watch": "tsc -w",
+    "prepare": "npm run build",
+    "pretest": "source .test.envrc"
   },
   "repository": {
     "type": "git",

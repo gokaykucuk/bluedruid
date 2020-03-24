@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import {CreateCollections} from "./Manage";
+import {CreateCollections, DropCollections} from "./Collections";
 import {execSync} from 'child_process';
 import {get} from 'shades';
-const _ = require('lodash');
+import * as _ from 'lodash';
 
 // Grab provided args.
 const [,, ... args] = process.argv;
@@ -21,10 +21,9 @@ const commandsStore = {
     fauna:{
         start: faunaStart
     },
-    db: {
-        create:{
-            collections: CreateCollections
-        }
+    collections: {
+        create: CreateCollections,
+        drop: DropCollections
     }
 };
 
@@ -34,6 +33,6 @@ export const findNestedCommand = (commandChain: Array<string>) => {
 };
 
 if(process.env.NODE_ENV !== 'test'){
-    findNestedCommand(args);
+    findNestedCommand(args)();
 }
 

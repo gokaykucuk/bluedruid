@@ -1,0 +1,4 @@
+export FAUNA_DOMAIN=localhost
+export FAUNA_SCHEME=http
+export FAUNA_PORT=8443
+export FAUNA_ROOT_KEY=secret
