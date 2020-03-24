@@ -14,9 +14,9 @@ const faunaStart = () => {
     console.log(result);
 };
 
-const command = {
+const commandsStore = {
     debug: {
-        cwd: _.flow(process.cwd, console.log)
+        cwd: _.flow(process.cwd, console.log, process.cwd)
     },
     fauna:{
         start: faunaStart
@@ -29,11 +29,11 @@ const command = {
 };
 
 export const findNestedCommand = (commandChain: Array<string>) => {
-    const foundCommand = get(commandChain.join('.'));
-    return commandChain.reduce((obj: any, prop: string)=>{
-    //     return obj && obj[prop];
-    // }, command);
-    // return foundCommand;
+    // @ts-ignore
+    return get(...commandChain)(commandsStore);
 };
 
-findNestedCommand(args);
+if(process.env.NODE_ENV !== 'test'){
+    findNestedCommand(args);
+}
+

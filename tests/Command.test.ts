@@ -1,5 +1,7 @@
 import {findNestedCommand} from '../src/Command'
 
 test("calls creation function with correct command",()=>{
-    findNestedCommand(['debug', 'cwd']);
+    const command = findNestedCommand(['debug', 'cwd']);
+    expect(command()).toBe(process.cwd());
 });
+
