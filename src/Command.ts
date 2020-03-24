@@ -14,7 +14,7 @@ const faunaStart = () => {
     console.log(result);
 };
 
-const faunaCleanup = () => {
+const faunaCleanStart = () => {
     const command = "docker run -d --rm --name faunadb -p 8443:8443 fauna/faunadb";
     console.log(command);
 }
@@ -25,7 +25,7 @@ const commandsStore = {
     },
     fauna:{
         start: faunaStart,
-        cleanStart: faunaCleanup
+        cleanStart: faunaCleanStart
     },
     collections: {
         create: CreateCollections,
