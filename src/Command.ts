@@ -1,11 +1,7 @@
 #!/usr/bin/env node
 import {CreateCollections} from "./Manage";
 import {execSync} from 'child_process';
-import {pathLens} from "lodash-lens";
-
-import { get, set } from 'lodash/fp';
-import { lens } from 'lodash-lens';
-
+import {get} from 'shades';
 const _ = require('lodash');
 
 // Grab provided args.
@@ -33,11 +29,11 @@ const command = {
 };
 
 export const findNestedCommand = (commandChain: Array<string>) => {
-    const foundCommand = pathLens(commandChain.join('.'));
-    // return commandChain.reduce((obj: any, prop: string)=>{
+    const foundCommand = get(commandChain.join('.'));
+    return commandChain.reduce((obj: any, prop: string)=>{
     //     return obj && obj[prop];
     // }, command);
-    return foundCommand;
+    // return foundCommand;
 };
 
 findNestedCommand(args);
