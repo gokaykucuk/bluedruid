@@ -1,4 +1,4 @@
-import {GetDocuments, MatchParamOnIndex, GetElementByParams} from "../src/Read";
+import {GetAllDocuments, MatchParamOnIndex, GetDocumentsByParams, GetDocumentByParams} from "../src/Read";
 
 
 describe('reader', () => {
@@ -11,12 +11,12 @@ describe('reader', () => {
     });
 
     test('reader can get documents', async () => {
-        const getResult = await GetDocuments('deals');
+        const getResult = await GetAllDocuments('deals');
         expect(getResult).toBeTruthy();
     });
 
     test('can get elements after matching', async () =>{
-      const result = await GetElementByParams('deals',{
+      const result = await GetDocumentsByParams('deals',{
         columnName: 'url',
         value: 'https://urun.n11.com/kadin-parfum/lancome-la-vie-est-belle-edp-100-ml-kadin-parfum-P174446805'
       });

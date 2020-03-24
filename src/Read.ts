@@ -10,55 +10,42 @@ export const ExistsOnIndex = async (collectionName: string, params: any, matchTy
 
 };
 
-/*
-* Params must have the following format,
-* {
-*   columnName: value,
-*   columnName: value
-* }
-*
-*  */
-
-export const GetDocuments = async (collectionName: string, page: number = 0) => {
-    const faunaResponse: Document = await faunaClient.query(
+export const GetAllDocuments = (collectionName: string, page: number = 0) => {
+    return faunaClient.query(
        q.Paginate(
            q.Match(
                q.Index(`all_${collectionName}`)
            )
        )
     );
-
-    return faunaResponse.data;
 };
-
-
 type queryPair = {
-    columnName: string,
+    key: string,
     value: string
 };
 
-
-/**
- * @param collectionName
- * @param param
- * @constructor
- */
 export const MatchParamOnIndex = async (collectionName: string, param: queryPair) => {
-    const faunaResponse: Document = await
-        faunaClient.query(
-            q.Paginate(q.Match(q.Index(`${collectionName}_by_${param.columnName}`), param.value))
-        );
-
-    return faunaResponse.data;
+    return faunaClient.query(
+        q.Paginate(q.Match(q.Index(`${collectionName}_by_${param.key}`), param.value))
+    );
 };
 
+export const GetDocumentsByParams = (collectionName: string, params: Array<queryPair>, matchType: string = 'union', page: number = 0) => {
+    const documentLens = params.map((params)=>(q.Match(
+        q.Index(collectionName + "_by_" + params.key), params.value
+    )));
+
+    return faunaClient.query(
+        q.Paginate(documentLens)
+    );
+};
+
+
 //TODO: Improve and enable again
-export const MatchParamsByByIndex = async (collectionName: string, params: any) => {
-    const faunaResponses: any = await Promise.all(Object.entries(params).map((param) => {
+export const MatchParamsByByIndex = (collectionName: string, params: any) => {
+    return Object.entries(params).map((param) => {
         return faunaClient.query(
             q.Paginate(q.Match(q.Index(`${collectionName}_by_${param[0]}`), param[1] as any))
         );
-    }));
-
-    return flatten(faunaResponses.map((response: any) => response['data']));
+    });
 };
