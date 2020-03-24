@@ -1,9 +1,9 @@
 import {faunaClient, q} from "./Connection";
-import {values} from "faunadb";
-import Document = values.Document;
+import {pickBy} from 'lodash';
 
-export const CreateDocument = async (collectionName: string, documentData: any) => {
-    const faunaResponse: Document = await faunaClient.query(
-        q.Create(collectionName, {data: documentData}));
-    return faunaResponse.data;
+export const CreateDocument = (collectionName: string, documentData: any, rootKeyFilter: Array<string>) => {
+    const filteredDocumentData = pickBy(documentData, (key: string)=>(rootKeyFilter.includes(key)));
+    return faunaClient.query(
+        q.Create(collectionName, {data: filteredDocumentData})
+    );
 };

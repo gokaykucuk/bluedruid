@@ -1,6 +1,6 @@
 {
   "name": "bluedruid",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Collection of FaunaDB related functions",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -18,7 +18,7 @@
     "faunadb"
   ],
   "bin": {
-    "bdo": "bin/bdo.js"
+    "bdo": "lib/Command.js"
   },
   "author": "Gokay Kucuk",
   "license": "ISC",
@@ -29,7 +29,9 @@
   "devDependencies": {
     "@types/jest": "^25.1.4",
     "@types/node": "^13.9.2",
+    "@types/yaml": "^1.2.0",
     "jest": "^25.1.0",
+    "lodash-lens": "^1.0.2",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
   },
@@ -39,6 +41,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.149",
     "faunadb": "^2.13.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "yaml": "^1.8.3"
   }
 }
