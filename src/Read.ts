@@ -2,9 +2,6 @@
 //
 
 import {faunaClient, q} from './Connection';
-import {flatten} from 'lodash';
-import {values} from "faunadb";
-import Document = values.Document;
 
 export const ExistsOnIndex = async (collectionName: string, params: any, matchType: string = 'any') => {
 
@@ -19,6 +16,15 @@ export const GetAllDocuments = (collectionName: string, page: number = 0) => {
        )
     );
 };
+
+
+export const GetElementByRef = (ref: any) => {
+    return faunaClient.query(
+        q.Get(ref)
+    );
+};
+
+
 type queryPair = {
     key: string,
     value: string
@@ -30,7 +36,7 @@ export const MatchParamOnIndex = async (collectionName: string, param: queryPair
     );
 };
 
-export const GetDocumentsByParams = (collectionName: string, params: Array<queryPair>, matchType: string = 'union', page: number = 0) => {
+export const GetRefsByParams = (collectionName: string, params: Array<queryPair>, matchType: string = 'union', page: number = 0) => {
     const documentLens = params.map((params)=>(q.Match(
         q.Index(collectionName + "_by_" + params.key), params.value
     )));
