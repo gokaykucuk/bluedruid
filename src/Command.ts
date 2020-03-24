@@ -8,18 +8,24 @@ import * as _ from 'lodash';
 const [,, ... args] = process.argv;
 
 const faunaStart = () => {
-    const command = "sudo docker run -d --rm --name faunadb -p 8443:8443 fauna/faunadb";
+    const command = "docker run -d --rm --name faunadb -p 8443:8443 fauna/faunadb";
     console.log(command);
     const result = execSync(command);
     console.log(result);
 };
+
+const faunaCleanup = () => {
+    const command = "docker run -d --rm --name faunadb -p 8443:8443 fauna/faunadb";
+    console.log(command);
+}
 
 const commandsStore = {
     debug: {
         cwd: _.flow(process.cwd, console.log, process.cwd)
     },
     fauna:{
-        start: faunaStart
+        start: faunaStart,
+        cleanStart: faunaCleanup
     },
     collections: {
         create: CreateCollections,

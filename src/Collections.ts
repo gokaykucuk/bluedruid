@@ -7,7 +7,7 @@ export const CreateCollections = () => {
     const collectionNames = _.flow(
         ReadDefaultSchema,
         get('collections')
-    )();
+    );
     const createResultPromises = _.map(
         collectionNames,
         _.flow(

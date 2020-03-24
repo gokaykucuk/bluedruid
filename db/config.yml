@@ -1,7 +1,11 @@
-dev:
-prod:
+development:
+  domain: localhost
+  scheme: http
+  port: 8443
+  secret: secret
 test:
   domain: localhost
   scheme: http
   port: 8443
   secret: secret
+production:

@@ -1,5 +1,6 @@
 import {findNestedCommand} from '../src/Command'
-import { CreateCollection, CreateCollections } from '../src/Collections';
+import { CreateCollection, CreateCollections, DropCollection } from '../src/Collections';
+
 
 describe('schema level operations for faunadb', () => {
 
@@ -16,12 +17,10 @@ describe('schema level operations for faunadb', () => {
         });
     });
     
-    test('can list collections', async () => {
-        CreateCollection('list_tests').then((result) => { 
+    test('can list collections', () => {
+        CreateCollection('collection_test_list').then((result: any) => { 
+            expect(result.name).toBe('collection_test_list');
             console.log(result);
-        }).catch((e)=>{
-            console.log(e);
         });
     });
-    
 });

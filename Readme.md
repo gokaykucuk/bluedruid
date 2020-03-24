@@ -16,5 +16,9 @@ Here will be some steps how to get up and running. Some examples will follow bel
 
 ```npm install --save bluedruid```
 
+### Docker without `sudo`
+
+https://docs.docker.com/install/linux/linux-postinstall/
+
 ## Functions
 
