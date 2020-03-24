@@ -28,7 +28,7 @@ export const GetDocuments = async (collectionName: string, page: number = 0) => 
        )
     );
 
-    return faunaResponse['data'];
+    return faunaResponse.data;
 };
 
 
@@ -49,7 +49,7 @@ export const MatchParamOnIndex = async (collectionName: string, param: queryPair
             q.Paginate(q.Match(q.Index(`${collectionName}_by_${param.columnName}`), param.value))
         );
 
-    return faunaResponse['data'];
+    return faunaResponse.data;
 };
 
 //TODO: Improve and enable again
