@@ -8,7 +8,8 @@
     "test": "jest .",
     "build": "tsc",
     "watch": "tsc -w",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "test:debug": "node inspect node_modules/.bin/jest --runInBand"
   },
   "repository": {
     "type": "git",
