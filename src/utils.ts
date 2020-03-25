@@ -1,5 +1,4 @@
-import * as _ from 'lodash';
-import * as YAML from 'yaml';
 import * as fs from 'fs';
+import { pipe } from 'ramda';
 
-export const ReadYAML = _.flow((c)=>(fs.readFileSync(c,'utf-8')), YAML.parse);
+export const ReadJSONFile = pipe((c: string)=>(fs.readFileSync(c,'utf-8')), JSON.parse);

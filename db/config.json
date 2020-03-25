@@ -1,0 +1,12 @@
+{
+  "development":{
+    "secret": "none"
+  },
+  "test":{
+    "secret": "fnADnyj1rVACAN2-9LgnRzEw70HAHJLK18aUhUTU"
+  },
+  "production":{
+    "secret": "none"
+  }
+}
+
