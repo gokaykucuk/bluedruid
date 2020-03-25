@@ -1,3 +1,3 @@
 collections:
-  - {name: collection_test_create_1}
-  - {name: collection_test_create_2, index_all: true}
+  - {name: collection1_name}
+  - {name: collection2_name, index_all: true}
