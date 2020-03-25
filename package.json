@@ -31,7 +31,7 @@
   "devDependencies": {
     "@types/jest": "^25.1.4",
     "@types/node": "^13.9.2",
-    "@types/yaml": "^1.2.0",
+    "@types/lodash": "^4.14.149",
     "jest": "^25.1.0",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
@@ -40,10 +40,8 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "@types/lodash": "^4.14.149",
     "faunadb": "^2.13.0",
     "lodash": "^4.17.15",
-    "shades": "^2.1.0",
-    "yaml": "^1.8.3"
+    "shades": "^2.1.0"
   }
 }
