@@ -2,7 +2,7 @@ import {findNestedCommand} from '../src/Command'
 import { CreateCollection, CreateCollections, DropCollection, DropCollections, CollectionNames} from '../src/Collections';
 import {nth} from 'lodash';
 
-describe('schema level operations for faunadb', () => {
+describe.skip('schema level operations for faunadb', () => {
 
    test("calls creation function with correct command",()=>{
         const command = findNestedCommand(['debug', 'cwd']);
