@@ -4,10 +4,7 @@ development:
   port: 8443
   secret: secret
 test:
-  domain: localhost
-  scheme: http
-  port: 8443
-  secret: secret
+  secret: fnADnyj1rVACAN2-9LgnRzEw70HAHJLK18aUhUTU
 production:
   domain: localhost
   scheme: http
