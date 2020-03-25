@@ -6,11 +6,11 @@ describe('document operations:', () => {
   const testCollectionName = 'documents_test';
   const testData = {column: 'value'}
   beforeAll(()=>{
-    CreateCollection(testCollectionName);
+    return CreateCollection(testCollectionName);
   });
 
 
-  test('reader can get documents', async () => {
+  test.skip('reader can get documents', async () => {
     const getResult = await GetAllDocuments('deals');
     expect(getResult).toBeTruthy();
   });
@@ -18,7 +18,7 @@ describe('document operations:', () => {
   test('create', () => {
     console.log(testCollectionName);
     console.log(testData);
-    return CreateDocument(testCollectionName,['test_column'], testData).then((createResult: any){
+    return CreateDocument(testCollectionName,['test_column'], testData).then((createResult: any) => {
       console.log(createResult);
     }).catch(console.log);
   });

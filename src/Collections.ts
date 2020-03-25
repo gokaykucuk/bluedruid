@@ -1,13 +1,13 @@
 import {faunaClient, q} from "./Connection";
-import * as _ from 'lodash';
 import {ReadJSONFile} from './utils';
 import {get, all} from 'shades';
+import { map, pipe } from 'ramda';
 
 export const ReadDefaultSchema = () => {
     return ReadJSONFile('./db/schema.json');
 };
 
-export const CollectionNames = _.flow(
+export const CollectionNames = pipe(
     ReadDefaultSchema,
     get('collections',all(),'name')
 );
@@ -22,14 +22,14 @@ export const DropCollection = (collectionName: string) => {
 };
 
 export const CreateCollections = Promise.all(
-    _.map(
+    map(
         CollectionNames(),
         CreateCollection
     )
 );
 
 export const DropCollections = Promise.all(
-    _.map(
+    map(
         CollectionNames(),
         DropCollection
     )

@@ -2,7 +2,7 @@
 import {CreateCollections, DropCollections} from "./Collections";
 import {execSync} from 'child_process';
 import {get} from 'shades';
-import {flow, curry} from 'lodash';
+import {pipe, curry} from 'ramda';
 
 /*
     This might become it's own project. Commands store needs
@@ -23,7 +23,7 @@ const carryArg = curry((fn: Function, arg: any) => {
     return arg;
 });
 const carriedLog = carryArg(console.log);
-const logAndRunCommand = flow(carriedLog, execSync, console.log);
+const logAndRunCommand = pipe(carriedLog, execSync, console.log);
 
 const setupFaunaDB = () => (logAndRunCommand("docker run -d --rm --name faunadb -p 8443:8443 fauna/faunadb"));
 const destroyFaunaDB = () => (logAndRunCommand("docker rm --force faunadb"));
@@ -31,12 +31,12 @@ const resumeFaunaDB = () => (logAndRunCommand("docker start faunadb"));
 
 const commandsStore = {
     debug: {
-        cwd: flow(process.cwd, console.log, process.cwd)
+        cwd: pipe(process.cwd, console.log, process.cwd)
     },
     fauna:{
         start: setupFaunaDB,
         resume: resumeFaunaDB,
-        cleanStart: flow(destroyFaunaDB, setupFaunaDB)
+        cleanStart: pipe(destroyFaunaDB, setupFaunaDB)
     },
     collections: {
         create: CreateCollections,

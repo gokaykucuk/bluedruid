@@ -1,6 +1,6 @@
 import {findNestedCommand} from '../src/Command'
 import { CreateCollection, CreateCollections, DropCollection, DropCollections, CollectionNames} from '../src/Collections';
-import {nth} from 'lodash';
+import {nth} from 'ramda';
 
 describe.skip('schema level operations for faunadb', () => {
 
@@ -18,7 +18,7 @@ describe.skip('schema level operations for faunadb', () => {
     });
 
     test("can create and drop collection", ()=> {
-        const collectionName = nth(CollectionNames(), 1) as string;
+        const collectionName = nth(1, CollectionNames()) as string;
         CreateCollection(collectionName).then((createResult:any)=>{
             expect(createResult.name).toBe(collectionName);
             return DropCollection(collectionName).then((dropResult :any)=>

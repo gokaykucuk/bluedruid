@@ -1,7 +1,7 @@
 // Matchtype can be 'or' or 'and'. If it's or, it will return all results from all queries. If it's
 //
 import {faunaClient, q} from './Connection';
-import {pickBy} from 'lodash';
+import {pickBy} from 'ramda';
 
 export const ExistsOnIndex = async (collectionName: string, params: any, matchType: string = 'any') => {
 

@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
 import * as fs from 'fs';
+import { pipe } from 'ramda';
 
-export const ReadJSONFile = _.flow((c)=>(fs.readFileSync(c,'utf-8')), JSON.parse);
+export const ReadJSONFile = pipe((c: string)=>(fs.readFileSync(c,'utf-8')), JSON.parse);

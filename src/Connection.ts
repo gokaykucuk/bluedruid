@@ -1,11 +1,11 @@
 import * as faunadb from 'faunadb';
 import { ReadJSONFile } from './utils';
 import { get } from 'shades';
-import * as _ from 'lodash';
+import { pipe } from 'ramda';
 
 export const q = faunadb.query;
 
-const envConfig = _.flow(
+const envConfig = pipe(
     ReadJSONFile,
     get(process.env.NODE_ENV as string)
 );
