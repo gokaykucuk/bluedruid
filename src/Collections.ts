@@ -1,11 +1,7 @@
 import {faunaClient, q} from "./Connection";
-import {ReadJSONFile} from './utils';
+import {ReadDefaultSchema } from './utils';
 import {get, all} from 'shades';
 import { map, pipe } from 'ramda';
-
-export const ReadDefaultSchema = () => {
-    return ReadJSONFile('./db/schema.json');
-};
 
 export const CollectionNames = pipe(
     ReadDefaultSchema,
