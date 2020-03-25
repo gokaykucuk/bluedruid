@@ -19,7 +19,7 @@ describe('document operations:', () => {
     console.log(testCollectionName);
     console.log(testData);
     return CreateDocument(testCollectionName,['test_column'], testData).then((createResult: any) => {
-      console.log(createResult);
+      return expect(createResult.ref).toBeTruthy();
     }).catch(console.log);
   });
 
