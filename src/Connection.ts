@@ -5,8 +5,6 @@ import * as _ from 'lodash';
 
 export const q = faunadb.query;
 
-
-console.log(process.env);
 const envConfig = _.flow(
     ReadYAML,
     get(process.env.NODE_ENV as string)

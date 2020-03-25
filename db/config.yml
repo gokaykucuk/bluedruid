@@ -9,3 +9,7 @@ test:
   port: 8443
   secret: secret
 production:
+  domain: localhost
+  scheme: http
+  port: 8443
+  secret: secret

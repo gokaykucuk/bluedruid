@@ -1,5 +1,5 @@
 import {findNestedCommand} from '../src/Command'
-import { CreateCollection, CreateCollections, DropCollection } from '../src/Collections';
+import { CreateCollection, CreateCollections} from '../src/Collections';
 
 
 describe('schema level operations for faunadb', () => {
@@ -9,12 +9,18 @@ describe('schema level operations for faunadb', () => {
         expect(command()).toBe(process.cwd());
     });
     
-    test("can create collections", () => {
+    test("can create collections listed in schema.yaml", () => {
         CreateCollections().then((results)=>{
             expect(results.length).toBe(2);
         }).catch((e)=>{
             console.log(e);
         });
+    });
+
+    test("can delete collection", ()=> {
+        CreateCollection('deletion_test').then((result:any)=>{
+            console.log(result);
+        })
     });
     
     test('can list collections', () => {
