@@ -1,10 +1,10 @@
 import {faunaClient, q} from "./Connection";
 import * as _ from 'lodash';
-import {ReadYAML} from './utils';
+import {ReadJSONFile} from './utils';
 import {get, all} from 'shades';
 
 export const ReadDefaultSchema = () => {
-    return ReadYAML('./db/schema.yml');
+    return ReadJSONFile('./db/schema.json');
 };
 
 export const CollectionNames = _.flow(

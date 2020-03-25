@@ -9,7 +9,7 @@ describe.skip('schema level operations for faunadb', () => {
         expect(command()).toBe(process.cwd());
     });
     
-    test("can create collections listed in schema.yaml", () => {
+    test("can create collections listed in schema.json", () => {
         CreateCollections.then((results)=>{
             expect(results.length).toBe(2);
         }).catch((e)=>{
