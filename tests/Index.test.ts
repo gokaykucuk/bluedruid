@@ -1,6 +1,6 @@
 import {GetAllDocuments, MatchParamOnIndex, GetRefsByParams} from "../src/Document";
 
-describe('index operations:', () => {
+describe.skip('index operations:', () => {
     test('reader can match param on idexes', async () => {
         const matchResult = await MatchParamOnIndex('deals', {
             key: 'url',
