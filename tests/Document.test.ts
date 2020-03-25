@@ -16,8 +16,6 @@ describe('document operations:', () => {
   });
 
   test('create', () => {
-    console.log(testCollectionName);
-    console.log(testData);
     return CreateDocument(testCollectionName,['test_column'], testData).then((createResult: any) => {
       return expect(createResult.ref).toBeTruthy();
     }).catch(console.log);
