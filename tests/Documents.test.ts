@@ -1,5 +1,5 @@
 import {CreateCollection, DropCollection} from '../src/Collections';
-import {GetAllDocuments, CreateDocument} from '../src/Document';
+import {GetAllDocuments, CreateDocument} from '../src/Documents';
 
 
 describe('document operations:', () => {

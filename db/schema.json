@@ -3,8 +3,12 @@
     { "name": "collection1_name" },
     { "name": "collection2_name", "index_all": true },
     { "name": "index_on_column_name",
-      "index": ["columnName"]
+      "indexes": [
+        {"terms": ["column_name"],
+         "values": ["column_name"],
+         "unique": true
+        }
+      ]
     }
   ]
 }
-
