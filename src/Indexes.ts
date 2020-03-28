@@ -1,8 +1,8 @@
 import { faunaClient, q } from "./Connection";
-import { map, pipe, concat, filter, defaultTo } from "ramda";
+import { map, pipe, concat, filter, isNil, reject, curry } from "ramda";
 import { get, all } from "shades";
 import { ReadDefaultSchema } from "./utils";
-import { Collection } from "./Collections";
+import { Collection, SchemaCollections } from "./Collections";
 
 export type IndexDef = {
   terms: Array<string>;
@@ -15,20 +15,17 @@ export const faunaIndexDef = pipe(
   concat([{ field: ["ref"] }])
 );
 
-export const CreateIndex = (
-  indexName: string,
-  collectionName: string,
-  def: IndexDef
-) =>
+export const CreateIndex = curry((collectionName: string, def: IndexDef) =>
   faunaClient.query(
     q.CreateIndex({
-      name: indexName,
+      name: `${collectionName}_by_${def.terms.join("_and_")}`,
       source: q.Collection(collectionName),
       terms: faunaIndexDef(def.terms),
       values: faunaIndexDef(def.values),
       unique: def.unique
     })
-  );
+  )
+);
 
 export const CreateAllIndex = (collectionName: string) =>
   faunaClient.query(
@@ -57,7 +54,21 @@ export const indexes = pipe(
   get("collections", all(), "indexes")
 );
 
-export const CreateIndexes = () => {};
+export const collectionsWithIndexes = pipe(
+  SchemaCollections,
+  //@ts-ignore
+  filter(get("indexes"))
+);
+
+export const createCollectionOnIndexes = (collection: Collection) =>
+  Promise.all(map(CreateIndex(collection.name), collection.indexes));
+
+export const CreateIndexes = () =>
+  pipe(
+    //@ts-ignore
+    collectionsWithIndexes,
+    map(createCollectionOnIndexes)
+  );
 //   terms: [{ field: ['data', 'iataCode'] }],
 //   values: [{ field: ['data', 'iataCode'] }, { field: ['data', 'name'] }, { field: ['ref'] }],
 //   unique: true

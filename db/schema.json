@@ -1,12 +1,20 @@
 {
-  "collections":[
+  "collections": [
     { "name": "collection1_name" },
     { "name": "collection2_name", "index_all": true },
-    { "name": "index_on_column_name",
+    {
+      "name": "unique_index_on_column_name",
       "indexes": [
-        {"terms": ["column_name"],
-         "values": ["column_name"],
-         "unique": true
+        { "terms": ["column_name"], "values": ["column_name"], "unique": true }
+      ]
+    },
+    {
+      "name": "index_on_column_name",
+      "indexes": [
+        {
+          "terms": ["column_name"],
+          "values": ["column_name"],
+          "unique": false
         }
       ]
     }
