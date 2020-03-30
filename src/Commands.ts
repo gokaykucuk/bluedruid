@@ -41,6 +41,9 @@ const commandsStore = {
     collections: {
         create: CreateCollections,
         drop: DropCollections
+    },
+    indexes: {
+      create: ""
     }
 };
 
