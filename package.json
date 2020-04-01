@@ -41,6 +41,7 @@
 	],
 	"dependencies": {
 		"faunadb": "^2.13.0",
-		"rambda": "^5.0.0"
+		"rambda": "^5.0.0",
+		"specimen02": "^0.1.0"
 	}
 }

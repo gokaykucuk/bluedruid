@@ -2,6 +2,7 @@ import { faunaClient, q } from "./Connection";
 import { map, pipe, concat, filter, isNil, reject, curry, path } from "rambda";
 import { ReadDefaultSchema } from "./utils";
 import { Collection, SchemaCollections } from "./Collections";
+import { lensPath, defaultTo } from "ramda";
 
 export type IndexDef = {
 	terms: Array<string>;
@@ -35,12 +36,14 @@ export const CreateAllIndex = (collectionName: string) =>
 	);
 
 const hasAllIndex = (collection: Collection) => collection.index_all;
-export const allIndexedCollectionNames = pipe(
+export const allIndexedCollectionNames: Array<string> = pipe(
 	ReadDefaultSchema,
-	path(["collections"]),
+	lensPath(["collections"]),
 	filter(hasAllIndex),
-	map(path(["name"]))
+	map(path("name"))
 );
+
+const ToString = (arg: unknown) => (arg.ToString());
 
 export const CreateAllIndexes = pipe(
 	allIndexedCollectionNames,
@@ -49,13 +52,13 @@ export const CreateAllIndexes = pipe(
 
 export const indexes = pipe(
 	ReadDefaultSchema,
-	path(["collections"]),
+	lensPath(["collections"]),
 	map(path(["indexes"]))
 );
 
 export const collectionsWithIndexes = pipe(
 	SchemaCollections,
-	filter(path(["indexes"]))
+	lensPath(["indexes"])
 );
 
 export const createCollectionOnIndexes = (collection: Collection) =>

@@ -1,6 +1,6 @@
 import { faunaClient, q } from "./Connection";
 import { ReadDefaultSchema } from "./utils";
-import { map, pipe, path } from "rambda";
+import { map, pipe, path, lensPath } from "rambda";
 import { IndexDef } from "./Indexes";
 
 export type Collection = {
@@ -11,10 +11,10 @@ export type Collection = {
 
 export const SchemaCollections = pipe(
 	ReadDefaultSchema,
-	path(["collections"])
+	lensPath(["collections"])
 );
 //@ts-ignore
-export const SchemaCollectionNames = pipe(SchemaCollections, map(get("name")));
+export const SchemaCollectionNames = map(get("name"), SchemaCollections());
 
 export const CreateCollection = (collectionName: string) => {
 	return faunaClient.query(q.CreateCollection({ name: collectionName }));
@@ -24,9 +24,7 @@ export const DropCollection = (collectionName: string) => {
 	return faunaClient.query(q.Delete(q.Collection(collectionName)));
 };
 
-export const CreateCollections = Promise.all(
-	map(SchemaCollectionNames(), CreateCollection)
-);
+export const CreateCollections = Promise.all(map(CreateCollection, SchemaCollectionNames()));
 
 export const DropCollections = Promise.all(
 	map(SchemaCollectionNames(), DropCollection)
