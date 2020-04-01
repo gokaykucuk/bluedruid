@@ -41,7 +41,6 @@
 	],
 	"dependencies": {
 		"faunadb": "^2.13.0",
-		"ramda": "^0.27.0",
-		"shades": "^2.1.0"
+		"rambda": "^5.0.0"
 	}
 }
