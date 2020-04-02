@@ -11,6 +11,7 @@ export type IndexDef = {
 };
 
 export const faunaIndexDef = pipe(
+	//@ts-ignore
 	map((columnName: string) => ({ field: ["data", columnName] })),
 	concat([{ field: ["ref"] }])
 );
