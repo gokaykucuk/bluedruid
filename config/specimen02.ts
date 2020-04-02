@@ -1,16 +1,16 @@
-import { setupFaunaDB, resumeFaunaDB, destroyFaunaDB } from '../src/Commands';
-import { pipe } from 'ramda';
-import { CreateCollections, DropCollections } from '../src/Collections';
+const commands = require('../src/Commands');
+const pipe = require('rambda');
+const collections = require('../src/Collections');
 
-export const commandsStore = {
+module.exports = {
 	fauna: {
-		start: setupFaunaDB,
-		resume: resumeFaunaDB,
-		cleanStart: pipe(destroyFaunaDB, setupFaunaDB)
+		start: commands.setupFaunaDB,
+		resume: commands.resumeFaunaDB,
+		cleanStart: pipe(commands.destroyFaunaDB, commands.setupFaunaDB)
 	},
 	collections: {
-		create: CreateCollections,
-		drop: DropCollections
+		create: collections.CreateCollections,
+		drop: collections.DropCollections
 	},
 	indexes: {
 		create: ""

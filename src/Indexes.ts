@@ -1,8 +1,8 @@
 import { faunaClient, q } from "./Connection";
 import { map, pipe, concat, filter, isNil, reject, curry, path } from "rambda";
-import { ReadDefaultSchema } from "./utils";
+import { SchemaConfig } from "./utils";
 import { Collection, SchemaCollections } from "./Collections";
-import { lensPath, defaultTo } from "ramda";
+import { lensPath, defaultTo } from "rambda";
 
 export type IndexDef = {
 	terms: Array<string>;
@@ -36,30 +36,24 @@ export const CreateAllIndex = (collectionName: string) =>
 	);
 
 const hasAllIndex = (collection: Collection) => collection.index_all;
-export const allIndexedCollectionNames: Array<string> = pipe(
-	ReadDefaultSchema,
+export const readAllIndexedCollectionNames = pipe(
+	SchemaConfig,
 	lensPath(["collections"]),
 	filter(hasAllIndex),
 	map(path("name"))
 );
 
-const ToString = (arg: unknown) => (arg.ToString());
+export const allIndexedCollectionNames = readAllIndexedCollectionNames() as unknown as Array<string>;
 
-export const CreateAllIndexes = pipe(
-	allIndexedCollectionNames,
-	map(CreateAllIndex)
-);
+export const CreateAllIndexes = map(CreateAllIndex, allIndexedCollectionNames);
 
 export const indexes = pipe(
-	ReadDefaultSchema,
+	SchemaConfig,
 	lensPath(["collections"]),
 	map(path(["indexes"]))
 );
 
-export const collectionsWithIndexes = pipe(
-	SchemaCollections,
-	lensPath(["indexes"])
-);
+export const collectionsWithIndexes = path("indexes", SchemaCollections) as Array<Collection>;
 
 export const createCollectionOnIndexes = (collection: Collection) =>
 	Promise.all(map(CreateIndex(collection.name), collection.indexes));

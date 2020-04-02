@@ -1,6 +1,6 @@
 import * as faunadb from 'faunadb';
 import { ReadJSONFile } from './utils';
-import { pipe, path } from 'ramda';
+import { pipe, path } from 'rambda';
 import { ClientConfig } from 'faunadb';
 
 export const q = faunadb.query;

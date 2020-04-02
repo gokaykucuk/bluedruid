@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { execSync } from 'child_process';
-import { pipe, curry } from 'ramda';
+import { pipe, curry } from 'rambda';
 
 const carryArg = curry((fn: Function, arg: any) => {
 	fn(arg);
