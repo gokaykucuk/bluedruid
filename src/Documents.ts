@@ -1,7 +1,7 @@
 // Matchtype can be 'or' or 'and'. If it's or, it will return all results from all queries. If it's
 //
 import { faunaClient, q } from './Connection';
-import { pickBy } from 'rambda';
+import { pick } from 'rambda';
 
 export const ExistsOnIndex = async (collectionName: string, params: any, matchType: string = 'any') => {
 
@@ -59,7 +59,7 @@ export const MatchParamsByByIndex = (collectionName: string, params: any) => {
 
 
 export const CreateDocument = (collectionName: string, rootKeyFilter: Array<string>, documentData: any) => {
-	const filteredDocumentData = pickBy(documentData, (key: string) => (rootKeyFilter.includes(key)));
+	const filteredDocumentData = pick(rootKeyFilter, documentData);
 	return faunaClient.query(
 		q.Create(collectionName, { data: filteredDocumentData })
 	);
